@@ -16,23 +16,18 @@ dependencies {
     implementation "org.springframework:spring-orm:6.1.2"
     implementation "org.springframework.data:spring-data-jpa:3.2.5"
 
-    // Hibernate (совместим с Jakarta EE 10/11)
     implementation "org.hibernate:hibernate-core:6.6.1.Final"
 
-    // Flyway (правильный артефакт для Gradle)
-    implementation "org.flywaydb:flyway-core:11.13.1"
+    implementation("org.flywaydb:flyway-core:10.20.1")
+    implementation("org.flywaydb:flyway-database-postgresql:11.13.1")
 
-    // PostgreSQL драйвер
     implementation "org.postgresql:postgresql:42.7.7"
 
-    // Jakarta Servlet API (Tomcat 11 уже содержит, поэтому scope = provided)
     providedCompile "jakarta.servlet:jakarta.servlet-api:6.1.0"
 
-    // Lombok
     compileOnly "org.projectlombok:lombok:1.18.42"
     annotationProcessor "org.projectlombok:lombok:1.18.42"
 
-    // Тесты
     testImplementation platform("org.junit:junit-bom:5.10.0")
     testImplementation "org.junit.jupiter:junit-jupiter"
 }

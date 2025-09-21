@@ -21,7 +21,7 @@ public class Session {
     private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "Id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User userId;
 
     @Column(name = "ExpiresAt", nullable = false)

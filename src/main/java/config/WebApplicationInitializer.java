@@ -7,7 +7,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?> @Nullable [] getRootConfigClasses() {
-        return new Class[]{DatabaseConfig.class};
+        return new Class[]{DatabaseConfig.class, FlywayConfig.class};
     }
 
     @Override
