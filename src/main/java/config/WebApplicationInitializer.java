@@ -12,11 +12,11 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?> @Nullable [] getServletConfigClasses() {
-        return new Class[]{ApplicationConfig.class};
+        return new Class[]{ApplicationConfig.class, ThymeleafConfig.class, WebConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[0];
+        return new String[]{"/"};
     }
 }
