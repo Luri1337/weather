@@ -1,10 +1,35 @@
 package service;
 
+import dao.UserDao;
+import dto.UserDto;
 import jakarta.transaction.Transactional;
+import model.User;
 import org.springframework.stereotype.Service;
+import util.filter.PasswordUtil;
 
 @Service
 @Transactional
 public class UserService {
+    private final UserDao userDao;
+    private final PasswordUtil passwordUtil = new PasswordUtil();
 
+    UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void registerUser(UserDto userDto) {
+        User user = new User();
+        user.setLogin(userDto.getLogin());
+        user.setPassword(passwordUtil.hashPassword(userDto.getPassword()));
+        userDao.save(user);
+    }
+
+    public void authenticateUser(UserDto userDto) {
+        User user = userDao.getUserByLogin(userDto.getLogin())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(!passwordUtil.checkPassword(userDto.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Wrong password");
+        }
+    }
 }

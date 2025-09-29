@@ -12,8 +12,8 @@ public class UserDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Optional<User> getUserByEmail(String email) {
-        return Optional.ofNullable(entityManager.find(User.class, email));
+    public Optional<User> getUserByLogin(String login) {
+        return Optional.ofNullable(entityManager.find(User.class, login));
     }
 
     public void save(User user) {
