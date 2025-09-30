@@ -1,17 +1,15 @@
 package dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class UserDto {
-    private int id;
     private final String login;
     private final String password;
-
-    public UserDto(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
 }

@@ -2,10 +2,10 @@ package service;
 
 import dao.UserDao;
 import dto.UserDto;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import model.User;
 import org.springframework.stereotype.Service;
-import util.filter.PasswordUtil;
+import util.PasswordUtil;
 
 @Service
 @Transactional
@@ -17,19 +17,20 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public void registerUser(UserDto userDto) {
+    public void saveUser(UserDto userDto) {
         User user = new User();
         user.setLogin(userDto.getLogin());
         user.setPassword(passwordUtil.hashPassword(userDto.getPassword()));
         userDao.save(user);
     }
 
-    public void authenticateUser(UserDto userDto) {
+    public User getUserByLogin(UserDto userDto) {
         User user = userDao.getUserByLogin(userDto.getLogin())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if(!passwordUtil.checkPassword(userDto.getPassword(), user.getPassword())) {
             throw new RuntimeException("Wrong password");
         }
+        return user;
     }
 }

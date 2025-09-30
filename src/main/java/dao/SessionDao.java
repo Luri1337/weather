@@ -18,7 +18,7 @@ public class SessionDao {
         em.getTransaction().commit();
     }
 
-    public Optional<Session> findById(int id) {
+    public Optional<Session> findById(String id) {
         return Optional.ofNullable(em.find(Session.class, id));
     }
 

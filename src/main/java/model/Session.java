@@ -22,7 +22,7 @@ public class Session {
 
     @OneToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User userId;
+    private User user;
 
     @Column(name = "ExpiresAt", nullable = false)
     private LocalDateTime expiresAt;

@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import service.AuthService;
 import service.UserService;
 
 @Controller
 public class AuthController {
-    private final UserService userService;
+    private final AuthService authService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @GetMapping("/auth")
@@ -29,7 +30,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public String loginUser(@ModelAttribute UserDto userDto, Model model) {
-        userService.authenticateUser(userDto);
+        authService.authenticate(userDto);
         model.addAttribute("user", userDto);
         return "redirect:/";
     }
@@ -41,7 +42,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String signupUser(@ModelAttribute UserDto userDto, Model model) {
-        userService.registerUser(userDto);
+        authService.register(userDto);
         model.addAttribute("user", userDto);
         return "redirect:/";
     }
