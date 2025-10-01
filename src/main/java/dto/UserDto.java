@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
+@NoArgsConstructor()
 public class UserDto {
-    private final String login;
-    private final String password;
+    private String login;
+    private String password;
 }

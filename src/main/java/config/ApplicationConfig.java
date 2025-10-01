@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan({"service", "dto", "dao"})
+@ComponentScan({"service", "dao"})
 @PropertySource("classpath:application.properties")
 public class ApplicationConfig {}

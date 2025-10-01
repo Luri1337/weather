@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public class UserDao {
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public Optional<User> getUserByLogin(String login) {
         return Optional.ofNullable(entityManager.find(User.class, login));

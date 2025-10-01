@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import util.PasswordUtil;
 
 @Service
-@Transactional
 public class UserService {
     private final UserDao userDao;
     private final PasswordUtil passwordUtil = new PasswordUtil();

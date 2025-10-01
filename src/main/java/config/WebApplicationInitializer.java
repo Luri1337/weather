@@ -7,12 +7,12 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?> @Nullable [] getRootConfigClasses() {
-        return new Class[]{DatabaseConfig.class, FlywayConfig.class};
+        return new Class[]{ApplicationConfig.class, DatabaseConfig.class};
     }
 
     @Override
     protected Class<?> @Nullable [] getServletConfigClasses() {
-        return new Class[]{ApplicationConfig.class, ThymeleafConfig.class, WebConfig.class};
+        return new Class[]{ WebConfig.class};
     }
 
     @Override

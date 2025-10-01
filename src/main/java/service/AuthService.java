@@ -1,16 +1,14 @@
 package service;
 
 import dto.UserDto;
-import org.springframework.transaction.annotation.Transactional;
+import model.Session;
 import model.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-//TODO в этом сервисе будет 2 метода для логина и регистрации соответственно,
-// логика сервисов юзера и сессии будет отвечать только за юзера и сервис соответственно,
-// чтобы не нарушать срп и более структурно разделить бизнес логику.
-// То есть все запросы на авторизацию или аутентификацию будут идти в этот сервис сначала
+//TODO исправить ошибку, при регистрации(ошибка возникает при sign up)
+//доработать авторизацию полностью уже
 @Service
-@Transactional
 public class AuthService {
     private final UserService userService;
     private final SessionService sessionService;
@@ -20,12 +18,15 @@ public class AuthService {
         this.sessionService = sessionService;
     }
 
-    public void register(UserDto userDto) {
+    @Transactional
+    public Session register(UserDto userDto) {
         userService.saveUser(userDto);
+        return authenticate(userDto);
     }
 
-    public void authenticate(UserDto userDto) {
+    @Transactional
+    public Session authenticate(UserDto userDto) {
         User user = userService.getUserByLogin(userDto);
-        sessionService.createSession(user);
+        return sessionService.createSession(user);
     }
 }

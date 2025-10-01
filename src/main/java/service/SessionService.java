@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 @Service
-@Transactional
 public class SessionService {
 
     public static final int TIME_TO_EXPIRE = 30;
