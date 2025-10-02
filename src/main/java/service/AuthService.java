@@ -1,5 +1,6 @@
 package service;
 
+import dao.SessionDao;
 import dto.UserDto;
 import model.Session;
 import model.User;
@@ -12,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
     private final UserService userService;
     private final SessionService sessionService;
+    private final SessionDao sessionDao;
 
-    AuthService(UserService userService, SessionService sessionService) {
+    AuthService(UserService userService, SessionService sessionService, SessionDao sessionDao) {
         this.userService = userService;
         this.sessionService = sessionService;
+        this.sessionDao = sessionDao;
     }
 
     @Transactional

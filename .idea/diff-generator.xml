@@ -2,5 +2,7 @@
 <project version="4">
   <component name="DiffGenerationConfig">
     <option name="snapshotDbValue" value="baddb47c-1677-4ee6-98a5-c27bba1c5959" />
+    <option name="sourceModelValue" value="weather.main:entityManagerFactory" />
+    <option name="targetDbValue" value="baddb47c-1677-4ee6-98a5-c27bba1c5959__weather_public" />
   </component>
 </project>

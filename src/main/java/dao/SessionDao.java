@@ -13,9 +13,7 @@ public class SessionDao {
     private EntityManager em;
 
     public void save(Session session) {
-        em.getTransaction().begin();
         em.persist(session);
-        em.getTransaction().commit();
     }
 
     public Optional<Session> findById(String id) {
@@ -23,8 +21,6 @@ public class SessionDao {
     }
 
     public void delete(Session session) {
-        em.getTransaction().begin();
         em.remove(session);
-        em.getTransaction().commit();
     }
 }

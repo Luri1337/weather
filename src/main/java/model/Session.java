@@ -17,8 +17,9 @@ import java.util.UUID;
 @Table(name = "Sessions")
 public class Session {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
 
     @OneToOne
     @JoinColumn(name = "userId", nullable = false)

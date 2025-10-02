@@ -15,6 +15,7 @@ dependencies {
     implementation("org.springframework:spring-webmvc:7.0.0-M9")
     implementation "org.springframework:spring-orm:6.1.2"
     implementation "org.springframework.data:spring-data-jpa:3.2.5"
+    implementation("org.springframework.boot:spring-boot-starter-web:4.0.0-M3")
 
     implementation "org.hibernate:hibernate-core:6.6.1.Final"
 

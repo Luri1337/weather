@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class SessionService {
@@ -27,6 +28,10 @@ public class SessionService {
         sessionDao.save(session);
 
         return session;
+    }
+
+    public Session getSession(String sessionId) {
+        return sessionDao.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
     }
 
     public int getUserId(String sessionId) {

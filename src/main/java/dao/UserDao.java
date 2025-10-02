@@ -13,7 +13,10 @@ public class UserDao {
     private EntityManager entityManager;
 
     public Optional<User> getUserByLogin(String login) {
-        return Optional.ofNullable(entityManager.find(User.class, login));
+       User user =  entityManager.createQuery("select u from User u where u.login = :login", User.class)
+                .setParameter("login", login)
+                .getSingleResult();
+       return Optional.ofNullable(user);
     }
 
     public void save(User user) {

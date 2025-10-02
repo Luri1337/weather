@@ -1,0 +1,17 @@
+TRUNCATE TABLE Sessions;
+
+ALTER TABLE Sessions
+    ADD CONSTRAINT uc_sessions_userid UNIQUE (userId);
+
+DROP SEQUENCE locations_id_seq CASCADE;
+
+DROP SEQUENCE sessions_id_seq CASCADE;
+
+DROP SEQUENCE users_id_seq CASCADE;
+
+ALTER TABLE Sessions
+DROP
+COLUMN id;
+
+ALTER TABLE Sessions
+    ADD id VARCHAR(255) NOT NULL PRIMARY KEY;
