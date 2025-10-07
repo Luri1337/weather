@@ -35,14 +35,14 @@ public class SessionInterceptor implements HandlerInterceptor {
         }
 
         if(sessionId == null){
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/home");
             return false;
         }
 
         Session session = sessionService.getSession(sessionId);
-        if(session.getExpiresAt().isBefore(LocalDateTime.now())){
+        if(!session.getExpiresAt().isBefore(LocalDateTime.now())){
             sessionService.invalidate(sessionId);
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/home");
             return false;
         }
 

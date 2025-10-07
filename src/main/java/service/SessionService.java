@@ -4,9 +4,9 @@ import dao.SessionDao;
 import model.Session;
 import model.User;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,7 +20,16 @@ public class SessionService {
         this.sessionDao = sessionDao;
     }
 
-    public Session createSession(User user) {
+    public Session getOrCreateSession(User user) {
+        Optional<Session> existing = getSessionByUserId(user.getId());
+
+        if (existing.isPresent()) {
+            if(!existing.get().getExpiresAt().isBefore(LocalDateTime.now())) {
+                return existing.orElseThrow(() -> new RuntimeException("Session expired") );
+            }
+        }
+
+
         Session session = new Session();
         session.setExpiresAt(LocalDateTime.now().plusMinutes(TIME_TO_EXPIRE));
         session.setUser(user);
@@ -31,16 +40,15 @@ public class SessionService {
     }
 
     public Session getSession(String sessionId) {
-        return sessionDao.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
+        return sessionDao.findById(UUID.fromString(sessionId)).orElseThrow(() -> new RuntimeException("Session not found"));
     }
 
-    public int getUserId(String sessionId) {
-        Session session = sessionDao.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
-        return session.getUser().getId();
+    public Optional<Session> getSessionByUserId(int userId) {
+        return sessionDao.findByUserId(userId);
     }
 
     public void invalidate(String sessionId) {
-        Session session = sessionDao.findById(sessionId).orElseThrow(() -> new RuntimeException("Session not found"));
+        Session session = sessionDao.findById(UUID.fromString(sessionId)).orElseThrow(() -> new RuntimeException("Session not found"));
         sessionDao.delete(session);
     }
 }

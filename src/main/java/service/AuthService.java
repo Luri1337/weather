@@ -7,8 +7,6 @@ import model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//TODO исправить ошибку, при регистрации(ошибка возникает при sign up)
-//доработать авторизацию полностью уже
 @Service
 public class AuthService {
     private final UserService userService;
@@ -30,6 +28,6 @@ public class AuthService {
     @Transactional
     public Session authenticate(UserDto userDto) {
         User user = userService.getUserByLogin(userDto);
-        return sessionService.createSession(user);
+        return sessionService.getOrCreateSession(user);
     }
 }

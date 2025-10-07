@@ -2,7 +2,6 @@ package service;
 
 import dao.UserDao;
 import dto.UserDto;
-import org.springframework.transaction.annotation.Transactional;
 import model.User;
 import org.springframework.stereotype.Service;
 import util.PasswordUtil;
