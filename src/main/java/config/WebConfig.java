@@ -4,15 +4,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import util.interceptor.SessionInterceptor;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"controller"})
+@ComponentScan({"controller", "util.interceptor"})
 public class WebConfig implements WebMvcConfigurer {
+    private final SessionInterceptor sessionInterceptor;
+
+    public WebConfig(SessionInterceptor sessionInterceptor) {
+        this.sessionInterceptor = sessionInterceptor;
+    }
+
     @Bean
     public SpringResourceTemplateResolver springResourceTemplateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -35,5 +43,12 @@ public class WebConfig implements WebMvcConfigurer {
         viewResolver.setTemplateEngine(springTemplateEngine());
         viewResolver.setOrder(1);
         return viewResolver;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(sessionInterceptor)
+                .addPathPatterns("/*")
+                .excludePathPatterns("/login", "/css/**", "/js/**", "/images/**");
     }
 }

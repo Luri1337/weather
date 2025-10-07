@@ -1,29 +1,28 @@
-package util.filter;
+package util.interceptor;
 
-import jakarta.servlet.*;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Session;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import service.SessionService;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
-@Component
-public class SessionFilter implements Filter {
+ @Component
+public class SessionInterceptor implements HandlerInterceptor {
+
     private final SessionService sessionService;
 
-    public SessionFilter(SessionService sessionService) {
+    public SessionInterceptor(SessionService sessionService) {
         this.sessionService = sessionService;
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String sessionId = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -37,17 +36,19 @@ public class SessionFilter implements Filter {
 
         if(sessionId == null){
             response.sendRedirect(request.getContextPath() + "/login");
-            return;
+            return false;
         }
 
         Session session = sessionService.getSession(sessionId);
         if(session.getExpiresAt().isBefore(LocalDateTime.now())){
             sessionService.invalidate(sessionId);
             response.sendRedirect(request.getContextPath() + "/login");
-            return;
+            return false;
         }
 
         request.setAttribute("user", session.getUser());
-        filterChain.doFilter(request, response);
+        return true;
     }
+
+
 }
