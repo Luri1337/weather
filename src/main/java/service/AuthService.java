@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
     private final UserService userService;
     private final SessionService sessionService;
-    private final SessionDao sessionDao;
+    private final CookieService cookieService;
 
-    AuthService(UserService userService, SessionService sessionService, SessionDao sessionDao) {
+    AuthService(UserService userService, SessionService sessionService, CookieService cookieService) {
         this.userService = userService;
         this.sessionService = sessionService;
-        this.sessionDao = sessionDao;
+        this.cookieService = cookieService;
     }
 
     @Transactional
@@ -29,5 +29,13 @@ public class AuthService {
     public Session authenticate(UserDto userDto) {
         User user = userService.getUserByLogin(userDto);
         return sessionService.getOrCreateSession(user);
+    }
+
+    @Transactional
+    public Session logout(UserDto userDto) {
+        User user = userService.getUserByLogin(userDto);
+        Session session = sessionService.getOrCreateSession(user);
+        sessionService.invalidate(String.valueOf(session.getId()));
+        return session;
     }
 }

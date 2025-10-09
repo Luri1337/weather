@@ -48,7 +48,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionInterceptor)
-                .addPathPatterns("/*")
-                .excludePathPatterns("/login", "/home", "/signup",  "/css/**", "/js/**", "/images/**");
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login", "/", "/signup",  "/css/**", "/js/**", "/images/**", "/home.html");
+    }
+
+    @Override
+    public void addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
     }
 }

@@ -1,13 +1,13 @@
 package util.interceptor;
 
+import dto.UserDto;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Session;
-import org.jspecify.annotations.Nullable;
+import model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 import service.SessionService;
 
 import java.time.LocalDateTime;
@@ -35,18 +35,19 @@ public class SessionInterceptor implements HandlerInterceptor {
         }
 
         if(sessionId == null){
-            response.sendRedirect(request.getContextPath() + "/home");
+            response.sendRedirect(request.getContextPath() + "/home.html");
             return false;
         }
 
         Session session = sessionService.getSession(sessionId);
-        if(!session.getExpiresAt().isBefore(LocalDateTime.now())){
+        if(session.getExpiresAt().isBefore(LocalDateTime.now())){
             sessionService.invalidate(sessionId);
-            response.sendRedirect(request.getContextPath() + "/home");
+            response.sendRedirect(request.getContextPath() + "/home.html");
             return false;
         }
 
-        request.setAttribute("user", session.getUser());
+        User user = session.getUser();
+        request.setAttribute("user", new UserDto(user.getLogin(), user.getPassword()));
         return true;
     }
 

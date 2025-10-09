@@ -15,8 +15,10 @@
 
         <!-- If user is logged in -->
         <div th:if="${user != null}">
-            <span class="me-3">Hello, <strong th:text="${user.login}">Username</strong></span>
-            <a href="/logout" class="btn btn-outline-danger btn-sm">Logout</a>
+            <form th:action="@{/logout}" method="post" th:if="${user != null}" style="display:inline;">
+                <span class="me-3">Hello, <strong th:text="${user.login}">Username</strong></span>
+                <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+            </form>
         </div>
 
         <!-- If user is NOT logged in -->

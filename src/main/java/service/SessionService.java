@@ -4,6 +4,7 @@ import dao.SessionDao;
 import model.Session;
 import model.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -20,13 +21,15 @@ public class SessionService {
         this.sessionDao = sessionDao;
     }
 
+    @Transactional
     public Session getOrCreateSession(User user) {
         Optional<Session> existing = getSessionByUserId(user.getId());
 
         if (existing.isPresent()) {
             if(!existing.get().getExpiresAt().isBefore(LocalDateTime.now())) {
-                return existing.orElseThrow(() -> new RuntimeException("Session expired") );
+                return existing.get();
             }
+            invalidate(String.valueOf(existing.get().getId()));
         }
 
 

@@ -32,5 +32,6 @@ public class SessionDao {
 
     public void delete(Session session) {
         em.remove(session);
+        em.flush();
     }
 }
