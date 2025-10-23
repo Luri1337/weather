@@ -1,22 +1,20 @@
-package service;
+package service.authentication;
 
-import dao.SessionDao;
 import dto.UserDto;
 import model.Session;
 import model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import service.UserService;
 
 @Service
 public class AuthService {
     private final UserService userService;
     private final SessionService sessionService;
-    private final CookieService cookieService;
 
-    AuthService(UserService userService, SessionService sessionService, CookieService cookieService) {
+    AuthService(UserService userService, SessionService sessionService) {
         this.userService = userService;
         this.sessionService = sessionService;
-        this.cookieService = cookieService;
     }
 
     @Transactional
@@ -27,7 +25,7 @@ public class AuthService {
 
     @Transactional
     public Session authenticate(UserDto userDto) {
-        User user = userService.getUserByLogin(userDto);
+        User user = userService.getUserByLoginAndCheckPass(userDto);
         return sessionService.getOrCreateSession(user);
     }
 

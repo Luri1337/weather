@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
@@ -13,22 +13,23 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Home Page</h1>
 
-    <!-- If user is logged in -->
-    <div th:if="${user != null}">
-      <form th:action="@{/logout}" method="post" th:if="${user != null}" style="display:inline;">
-        <span class="me-3">Hello, <strong th:text="${user.login}">Username</strong></span>
+    <!-- Пример: пользователь не вошёл -->
+    <div>
+      <a href="/login" class="btn btn-primary me-2">Login</a>
+      <a href="/signup" class="btn btn-success">Sign Up</a>
+    </div>
+
+    <!-- Пример: если пользователь вошёл (раскомментируй при необходимости)
+    <div>
+      <form action="/logout" method="post" style="display:inline;">
+        <span class="me-3">Hello, <strong>Username</strong></span>
         <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
       </form>
     </div>
-
-    <!-- If user is NOT logged in -->
-    <div th:if="${user == null}">
-      <a th:href="@{/login}" class="btn btn-primary me-2">Login</a>
-      <a th:href="@{/signup}" class="btn btn-success">Sign Up</a>
-    </div>
+    -->
   </div>
 
-  <!-- Content -->
+  <!-- Search -->
   <div class="card p-4 shadow-sm mb-4">
     <h4 class="mb-3">Search Location</h4>
     <form action="/locations/search" method="get" class="d-flex">
@@ -37,24 +38,34 @@
     </form>
   </div>
 
-  <!-- Locations list -->
+  <!-- Locations -->
   <div class="card p-4 shadow-sm">
     <h4 class="mb-3">Your Locations</h4>
-    <ul class="list-group" th:if="${locations != null}">
-      <li class="list-group-item d-flex justify-content-between align-items-center mb-2"
-          th:each="loc : ${locations}">
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
         <div>
-          <strong th:text="${loc.name}">City</strong>
-          <span class="text-muted"> — <span th:text="${loc.temperature}">15°C</span></span>
+          <strong>Almaty</strong>
+          <span class="text-muted"> — 15°C</span>
         </div>
-        <form th:action="@{/locations/delete/{id}(id=${loc.id})}" method="post">
+        <form action="/locations/delete/1" method="post">
+          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </li>
+
+      <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <strong>Astana</strong>
+          <span class="text-muted"> — 10°C</span>
+        </div>
+        <form action="/locations/delete/2" method="post">
           <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
         </form>
       </li>
     </ul>
-    <p th:if="${locations == null or #lists.isEmpty(locations)}" class="text-muted">
-      You don’t have any saved locations yet
-    </p>
+
+    <!-- Если нет локаций
+    <p class="text-muted">You don’t have any saved locations yet</p>
+    -->
   </div>
 
 </div>

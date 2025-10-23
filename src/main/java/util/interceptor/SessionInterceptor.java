@@ -8,7 +8,7 @@ import model.Session;
 import model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import service.SessionService;
+import service.authentication.SessionService;
 
 import java.time.LocalDateTime;
 

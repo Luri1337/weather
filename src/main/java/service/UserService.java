@@ -22,7 +22,7 @@ public class UserService {
         userDao.save(user);
     }
 
-    public User getUserByLogin(UserDto userDto) {
+    public User getUserByLoginAndCheckPass(UserDto userDto) {
         User user = userDao.getUserByLogin(userDto.getLogin())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -30,5 +30,10 @@ public class UserService {
             throw new RuntimeException("Wrong password");
         }
         return user;
+    }
+
+    public User getUserByLogin(UserDto userDto) {
+        return userDao.getUserByLogin(userDto.getLogin())
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

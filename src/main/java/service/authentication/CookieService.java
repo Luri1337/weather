@@ -1,4 +1,4 @@
-package service;
+package service.authentication;
 
 import jakarta.servlet.http.Cookie;
 import org.springframework.stereotype.Service;

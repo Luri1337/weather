@@ -6,14 +6,13 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Session;
-import model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import service.AuthService;
-import service.CookieService;
+import service.authentication.AuthService;
+import service.authentication.CookieService;
 
 @Controller
 public class AuthController {
@@ -60,8 +59,8 @@ public class AuthController {
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getAttribute("user");
-        Session session = authService.logout(new UserDto(user.getLogin(), user.getPassword()));
+        UserDto user = (UserDto) request.getAttribute("user");
+        Session session = authService.logout(user);
         Cookie cookie = cookieService.deleteCookie(String.valueOf(session.getId()));
         response.addCookie(cookie);
         return "redirect:/home";

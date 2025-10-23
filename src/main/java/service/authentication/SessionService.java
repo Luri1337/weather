@@ -1,4 +1,4 @@
-package service;
+package service.authentication;
 
 import dao.SessionDao;
 import model.Session;
