@@ -3,7 +3,7 @@ package controller;
 import dto.UserDto;
 import dto.UserViewDto;
 import jakarta.servlet.http.HttpServletRequest;
-import model.User;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

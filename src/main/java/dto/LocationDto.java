@@ -14,4 +14,5 @@ public class LocationDto {
     private String country;
     private double lat;
     private double lon;
+    private double temp;
 }
