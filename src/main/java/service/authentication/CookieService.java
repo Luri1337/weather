@@ -14,7 +14,7 @@ public class CookieService {
     }
 
     public Cookie deleteCookie(String sessionId) {
-        Cookie cookie = new Cookie("sessionId", sessionId);
+        Cookie cookie = new Cookie("sessionId", null);
         cookie.setMaxAge(0);
         cookie.setHttpOnly(true);
         cookie.setPath("/");

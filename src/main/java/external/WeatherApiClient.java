@@ -37,6 +37,10 @@ public class WeatherApiClient {
                 })
                 .block();
 
+        if(response == null) {
+            throw new RuntimeException("No locations found");
+        }
+
         List<LocationDto> locations = new ArrayList<>();
         for (Map<String, Object> location : response) {
             LocationDto locationDto = new LocationDto();
@@ -63,12 +67,12 @@ public class WeatherApiClient {
                 .block();
 
         LocationDto locationDto = new LocationDto();
-        locationDto.setName((String) resp.get("name"));
+        locationDto.setCountry((String) resp.get("name"));
 
-        Map<String, Object> coord = (Map<String, Object>) resp.get("coord");
-        if (coord != null) {
-            locationDto.setLat((Double) coord.get("lat"));
-            locationDto.setLon((Double) coord.get("lon"));
+        Map<String, Object> cord = (Map<String, Object>) resp.get("coord");
+        if (cord != null) {
+            locationDto.setLat((Double) cord.get("lat"));
+            locationDto.setLon((Double) cord.get("lon"));
         }
 
         Map<String, Object> sys = (Map<String, Object>) resp.get("sys");

@@ -8,6 +8,8 @@ import model.Session;
 import model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import service.UserService;
+import service.authentication.CookieService;
 import service.authentication.SessionService;
 
 import java.time.LocalDateTime;
@@ -16,9 +18,11 @@ import java.time.LocalDateTime;
 public class SessionInterceptor implements HandlerInterceptor {
 
     private final SessionService sessionService;
+    private final CookieService cookieService;
 
-    public SessionInterceptor(SessionService sessionService) {
+    public SessionInterceptor(SessionService sessionService, CookieService cookieService) {
         this.sessionService = sessionService;
+        this.cookieService = cookieService;
     }
 
     @Override
@@ -42,6 +46,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         Session session = sessionService.getSession(sessionId);
         if(session.getExpiresAt().isBefore(LocalDateTime.now())){
             sessionService.invalidate(sessionId);
+            response.addCookie(cookieService.deleteCookie(String.valueOf(session.getId())));
             response.sendRedirect(request.getContextPath() + "/home.html");
             return false;
         }

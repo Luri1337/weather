@@ -50,6 +50,7 @@ public class SessionService {
         return sessionDao.findByUserId(userId);
     }
 
+    @Transactional
     public void invalidate(String sessionId) {
         Session session = sessionDao.findById(UUID.fromString(sessionId)).orElseThrow(() -> new RuntimeException("Session not found"));
         sessionDao.delete(session);

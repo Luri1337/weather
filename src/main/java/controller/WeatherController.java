@@ -3,10 +3,13 @@ package controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.LocationDto;
+import dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.WeatherService;
 
@@ -36,6 +39,13 @@ public class WeatherController {
         LocationDto location = weatherService.getWeather(lat, lon);
         model.addAttribute("weatherLocation", location);
         return "home";
+    }
+
+    @PostMapping("/addLocation")
+    public String addWeather(@ModelAttribute LocationDto location, Model model, HttpServletRequest request) {
+        UserDto user = (UserDto) request.getAttribute("user");
+        weatherService.addLocation(location, user);
+        return "redirect:/home";
     }
 
 }
