@@ -10,16 +10,16 @@ import java.util.Optional;
 @Repository
 public class UserDao {
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager em;
 
     public Optional<User> getUserByLogin(String login) {
-       User user =  entityManager.createQuery("select u from User u where u.login = :login", User.class)
+       User user =  em.createQuery("select u from User u where u.login = :login", User.class)
                 .setParameter("login", login)
                 .getSingleResult();
        return Optional.ofNullable(user);
     }
 
     public void save(User user) {
-        entityManager.persist(user);
+        em.persist(user);
     }
 }

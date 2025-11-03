@@ -18,6 +18,7 @@ import java.util.List;
 @Controller
 public class WeatherController {
     private final WeatherService weatherService;
+    private final ObjectMapper mapper = new ObjectMapper();
 
     public WeatherController(WeatherService weatherService) {
         this.weatherService = weatherService;
@@ -28,7 +29,6 @@ public class WeatherController {
     public String getLocations(HttpServletRequest request, Model model) throws JsonProcessingException {
         String city = request.getParameter("city");
         List<LocationDto> locations = weatherService.getLocations(city);
-        ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(locations);
     }
 
@@ -42,10 +42,18 @@ public class WeatherController {
     }
 
     @PostMapping("/addLocation")
-    public String addWeather(@ModelAttribute LocationDto location, Model model, HttpServletRequest request) {
+    public String addLocation   (@ModelAttribute LocationDto location, Model model, HttpServletRequest request) {
         UserDto user = (UserDto) request.getAttribute("user");
         weatherService.addLocation(location, user);
         return "redirect:/home";
+    }
+
+    @GetMapping("/getUserLocations")
+    @ResponseBody
+    public String getUserLocations(HttpServletRequest request, Model model) throws JsonProcessingException {
+        UserDto user = (UserDto) request.getAttribute("user");
+        List<LocationDto> userLocations = weatherService.getUserLocations(user);
+        return mapper.writeValueAsString(userLocations);
     }
 
 }
