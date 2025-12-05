@@ -16,6 +16,7 @@ dependencies {
     implementation "org.springframework:spring-orm:6.1.2"
     implementation "org.springframework.data:spring-data-jpa:3.2.5"
     implementation("org.springframework.boot:spring-boot-starter-web:4.0.0-M3")
+    implementation("org.springframework.boot:spring-boot-starter-validation:4.0.0")
 
     implementation("org.springframework:spring-webflux:7.0.0-M9")
     implementation("io.projectreactor:reactor-core:3.8.0-M7")

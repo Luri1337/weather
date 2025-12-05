@@ -5,6 +5,7 @@ import dto.UserViewDto;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import model.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute UserDto userDto, Model model, HttpServletResponse response) {
+    public String loginUser(@ModelAttribute @Valid UserDto userDto, Model model, HttpServletResponse response) {
         Session session = authService.authenticate(userDto);
         Cookie cookie = cookieService.createCookie(session.getId().toString());
         response.addCookie(cookie);
@@ -49,7 +50,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String signupUser(@ModelAttribute UserDto userDto, Model model, HttpServletResponse response) {
+    public String signupUser(@ModelAttribute @Valid UserDto userDto, Model model, HttpServletResponse response) {
         Session session = authService.register(userDto);
         Cookie cookie = cookieService.createCookie(session.getId().toString());
         response.addCookie(cookie);

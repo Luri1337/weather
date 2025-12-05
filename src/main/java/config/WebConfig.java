@@ -13,7 +13,7 @@ import util.interceptor.SessionInterceptor;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"controller", "util.interceptor"})
+@ComponentScan({"controller", "util"})
 public class WebConfig implements WebMvcConfigurer {
     private final SessionInterceptor sessionInterceptor;
 

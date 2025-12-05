@@ -5,6 +5,7 @@ import dto.UserDto;
 import model.User;
 import org.springframework.stereotype.Service;
 import util.PasswordUtil;
+import util.exception.NotUniqueLoginException;
 
 @Service
 public class UserService {
@@ -16,6 +17,10 @@ public class UserService {
     }
 
     public void saveUser(UserDto userDto) {
+        if (!isUnique(userDto)) {
+            throw new NotUniqueLoginException("Login already exists");
+        }
+
         User user = new User();
         user.setLogin(userDto.getLogin());
         user.setPassword(passwordUtil.hashPassword(userDto.getPassword()));
@@ -26,7 +31,7 @@ public class UserService {
         User user = userDao.getUserByLogin(userDto.getLogin())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if(!passwordUtil.checkPassword(userDto.getPassword(), user.getPassword())) {
+        if (!passwordUtil.checkPassword(userDto.getPassword(), user.getPassword())) {
             throw new RuntimeException("Wrong password");
         }
         return user;
@@ -35,5 +40,9 @@ public class UserService {
     public User getUserByLogin(UserDto userDto) {
         return userDao.getUserByLogin(userDto.getLogin())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    private boolean isUnique(UserDto userDto) {
+        return userDao.getUserByLogin(userDto.getLogin()).isEmpty();
     }
 }
