@@ -94,14 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <button type="submit" class="btn btn-sm btn-info">Weather</button>
                             </form>
                             
-                            <form action="/locations/delete" method="post">
+                            <form action="/deleteLocation" method="post">
                                 <input type="hidden" name="name" value="${loc.name}">
                                 <input type="hidden" name="lat" value="${loc.lat}">
                                 <input type="hidden" name="lon" value="${loc.lon}">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                            </form>
-                            
-                            
+                            </form>     
                         </div>
                     </li>
                 `).join('')}

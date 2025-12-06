@@ -22,4 +22,11 @@ public class LocationDao {
                 .setParameter("userId", userId)
                 .getResultList();
     }
+
+    public void delete(User userId, String name) {
+        em.createQuery("delete from Location l where l.userId = :userId and l.name = :name")
+                .setParameter("userId", userId)
+                .setParameter("name", name)
+                .executeUpdate();
+    }
 }

@@ -39,7 +39,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         }
 
         if(sessionId == null){
-            response.sendRedirect(request.getContextPath() + "/home.html");
+            response.sendRedirect("/");
             return false;
         }
 
@@ -47,7 +47,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         if(session.getExpiresAt().isBefore(LocalDateTime.now())){
             sessionService.invalidate(sessionId);
             response.addCookie(cookieService.deleteCookie(String.valueOf(session.getId())));
-            response.sendRedirect(request.getContextPath() + "/home.html");
+            response.sendRedirect("/");
             return false;
         }
 

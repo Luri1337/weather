@@ -10,6 +10,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public String handleException(Exception ex, HttpServletRequest request) {
+        System.out.println(ex.getMessage());
         return "error";
     }
 }

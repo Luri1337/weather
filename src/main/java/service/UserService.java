@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import util.PasswordUtil;
 import util.exception.NotUniqueLoginException;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private final UserDao userDao;
@@ -43,6 +45,7 @@ public class UserService {
     }
 
     private boolean isUnique(UserDto userDto) {
-        return userDao.getUserByLogin(userDto.getLogin()).isEmpty();
+        Optional<User> user = userDao.getUserByLogin(userDto.getLogin());
+        return user.isEmpty();
     }
 }

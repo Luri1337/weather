@@ -25,11 +25,6 @@ public class AuthController {
         this.cookieService = cookieService;
     }
 
-    @GetMapping("/auth")
-    public String auth() {
-        return "auth";
-    }
-
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -64,6 +59,6 @@ public class AuthController {
         Session session = authService.logout(user);
         Cookie cookie = cookieService.deleteCookie(String.valueOf(session.getId()));
         response.addCookie(cookie);
-        return "redirect:/home";
+        return "index";
     }
 }

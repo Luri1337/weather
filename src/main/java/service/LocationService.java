@@ -67,8 +67,11 @@ public class LocationService {
     }
 
     //TODO удаление локации
+    @Transactional
     public void deleteLocation(UserDto user, LocationDto location) {
-
+        User userId = userDao.getUserByLogin(user.getLogin())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        locationDao.delete(userId, location.getName());
     }
 }
 
