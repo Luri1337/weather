@@ -27,7 +27,7 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @GetMapping("/searchLocations")
+    @GetMapping(value = "/searchLocations", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String getLocations(HttpServletRequest request, Model model) throws JsonProcessingException {
         String city = request.getParameter("city");
@@ -51,7 +51,7 @@ public class WeatherController {
         return "redirect:/home";
     }
 
-    @GetMapping("/getUserLocations")
+    @GetMapping(value = "/getUserLocations", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String getUserLocations(HttpServletRequest request, Model model) throws JsonProcessingException {
         UserDto user = (UserDto) request.getAttribute("user");

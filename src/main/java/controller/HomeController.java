@@ -22,4 +22,14 @@ public class HomeController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/about")
+    public String aboutPage(HttpServletRequest request, Model model) {
+        UserDto user = (UserDto) request.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "about";
+    }
 }
+

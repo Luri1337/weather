@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About SkyCast | Intelligent Weather Platform</title>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    /* About page specific styles */
+    .about-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+              radial-gradient(circle at 20% 30%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #FFFFFF 0%, #A5B4FC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+    }
+
+    /* Mission Section */
+    .mission-statement {
+      font-size: 1.8rem;
+      text-align: center;
+      padding: 3rem;
+      background: linear-gradient(135deg,
+      rgba(79, 70, 229, 0.1),
+      rgba(16, 185, 129, 0.1));
+      border-radius: var(--radius-xl);
+      margin: 3rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-statement::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.03));
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      text-align: center;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .feature-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom,
+      transparent,
+      var(--primary),
+      var(--secondary),
+      transparent);
+    }
+
+    .timeline-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-left: 4rem;
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -3.5rem;
+      top: 2.5rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+    }
+
+    .timeline-year {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .team-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+
+    /* Stats Counter */
+    .stats-counter {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+
+    .counter-item {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .counter-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .counter-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.1rem;
+    }
+
+    /* Tech Stack */
+    .tech-stack {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .tech-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+      }
+
+      .mission-statement {
+        font-size: 1.4rem;
+        padding: 2rem;
+      }
+
+      .timeline {
+        padding-left: 1rem;
+      }
+
+      .timeline-item {
+        margin-left: 3rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item::before {
+        left: -2.8rem;
+      }
+
+      .counter-number {
+        font-size: 2.8rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .feature-card {
+        padding: 1.8rem;
+      }
+
+      .feature-icon {
+        font-size: 2.8rem;
+      }
+
+      .team-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+      }
+
+      .tech-item {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Animation for counters */
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Background Pattern -->
+<div class="bg-pattern"></div>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <i class="bi bi-cloud-lightning-rain-fill"></i>
+      <span>SkyCast</span>
+    </a>
+    <div class="navbar-actions">
+      <a href="/home" class="btn btn-outline btn-sm">
+        <i class="bi bi-house"></i> Dashboard
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container">
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="glass" style="padding: 4rem 3rem;">
+      <h1 class="hero-title">About SkyCast</h1>
+      <p class="hero-subtitle">
+        We're revolutionizing how people interact with weather data.
+        Combining cutting-edge technology with beautiful design to deliver
+        the most intuitive and accurate weather experience.
+      </p>
+
+      <div class="stats-counter">
+        <div class="counter-item">
+          <div class="counter-number" id="usersCount">10,000+</div>
+          <div class="counter-label">Active Users</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="citiesCount">500+</div>
+          <div class="counter-label">Cities Worldwide</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="accuracyCount">99.9%</div>
+          <div class="counter-label">Accuracy Rate</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="uptimeCount">24/7</div>
+          <div class="counter-label">Service Uptime</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Statement -->
+  <section>
+    <div class="mission-statement">
+      <i class="bi bi-quote" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+      <p>
+        Our mission is to make weather intelligence accessible, beautiful, and
+        actionable for everyone, everywhere.
+      </p>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section>
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
+      Why Choose SkyCast?
+    </h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-lightning-charge-fill"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Real-Time Data</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Live updates every minute with data from global meteorological sources.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-globe2"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Global Coverage</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Every city, town, and location worldwide with precise coordinates.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Smart Alerts</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Intelligent notifications for severe weather and changing conditions.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-graph-up-arrow"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Advanced Analytics</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Historical data, trends, and predictive models for better planning.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-phone"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Mobile First</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Fully responsive design that works perfectly on all devices.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="bi bi-lock"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Privacy Focused</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Your data is encrypted and never shared with third parties.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Timeline -->
+  <section>
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
+      Our Journey
+    </h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">
+          <i class="bi bi-lightbulb"></i>
+          <span>2023</span>
+        </div>
+        <h3 style="margin-bottom: 1rem;">The Beginning</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          SkyCast started as a university project with a simple goal:
+          create a weather app that's both powerful and beautiful.
+          Our team of passionate developers wanted to solve the
+          complexity of weather data visualization.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">
+          <i class="bi bi-rocket-takeoff"></i>
+          <span>2024</span>
+        </div>
+        <h3 style="margin-bottom: 1rem;">Launch & Growth</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          We launched our public beta and gained our first 1,000 users.
+          Implemented real-time updates, expanded to 500+ cities, and
+          introduced intelligent forecasting algorithms.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">
+          <i class="bi bi-stars"></i>
+          <span>Future</span>
+        </div>
+        <h3 style="margin-bottom: 1rem;">AI & Innovation</h3>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Working on AI-powered predictions, personalized weather insights,
+          and mobile applications. Our goal is to become Europe's most
+          accurate and intuitive weather platform.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section>
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
+      Technology Stack
+    </h2>
+
+    <div class="tech-stack">
+      <div class="tech-item">
+        <i class="bi bi-braces" style="color: var(--primary);"></i>
+        <span>Spring Boot</span>
+      </div>
+      <div class="tech-item">
+        <i class="bi bi-database" style="color: var(--secondary);"></i>
+        <span>PostgreSQL</span>
+      </div>
+      <div class="tech-item">
+        <i class="bi bi-code-slash" style="color: #F59E0B;"></i>
+        <span>JavaScript & jQuery</span>
+      </div>
+      <div class="tech-item">
+        <i class="bi bi-palette" style="color: #EF4444;"></i>
+        <span>CSS3 & HTML5</span>
+      </div>
+      <div class="tech-item">
+        <i class="bi bi-graph-up" style="color: #8B5CF6;"></i>
+        <span>Chart.js</span>
+      </div>
+      <div class="tech-item">
+        <i class="bi bi-cloud" style="color: #60A5FA;"></i>
+        <span>REST API</span>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; color: rgba(255, 255, 255, 0.5);">
+      <p>
+        Built with modern technologies ensuring scalability, performance,
+        and maintainability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section>
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
+      Meet Our Team
+    </h2>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="team-name">Dmitriy Kustov</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="team-name">Sultanseitova Nuriya</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="team-name">Yessenkos Akerke</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="team-name">Zharas Azamat</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Note -->
+  <div style="text-align: center; padding: 3rem 0; color: rgba(255, 255, 255, 0.4);">
+    <p>
+      <i class="bi bi-heart-fill" style="color: #EF4444;"></i>
+      Made with passion for weather enthusiasts worldwide
+    </p>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">
+      © 2025 SkyCast Weather Intelligence. All rights reserved.
+    </p>
+  </div>
+</main>
+
+<!-- Scripts -->
+<script>
+  // Animated counters
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add animation to counters when they come into view
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-counter');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all counter items
+    document.querySelectorAll('.counter-item').forEach(item => {
+      observer.observe(item);
+    });
+
+    // Add hover effects to team cards
+    document.querySelectorAll('.team-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px)';
+      });
+
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Add floating animation to feature icons
+    document.querySelectorAll('.feature-icon').forEach(icon => {
+      icon.style.animation = 'float 3s ease-in-out infinite';
+    });
+  });
+
+  // Back to top button functionality
+  window.addEventListener('scroll', function() {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+      if (window.scrollY > 500) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    }
+  });
+</script>
+
+<!-- Back to Top Button -->
+<button id="backToTop"
+        style="position: fixed; bottom: 30px; right: 30px;
+                   background: var(--primary); color: white; border: none;
+                   width: 50px; height: 50px; border-radius: 50%;
+                   font-size: 1.5rem; cursor: pointer; display: none;
+                   z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3);"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  ↑
+</button>
+</body>
+</html>

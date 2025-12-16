@@ -67,7 +67,8 @@ public class WeatherApiClient {
                 .block();
 
         LocationDto locationDto = new LocationDto();
-        locationDto.setCountry((String) resp.get("name"));
+        locationDto.setName((String) resp.get("name"));
+        locationDto.setCountry((String) resp.get("country"));
 
         Map<String, Object> cord = (Map<String, Object>) resp.get("coord");
         if (cord != null) {
