@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About SkyCast | Intelligent Weather Platform</title>
 
-  <!-- Bootstrap Icons -->
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-  <!-- Google Fonts -->
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css">
 
   <style>
-    /* About page specific styles */
     .about-hero {
       padding: 140px 0 80px;
       text-align: center;
@@ -53,7 +52,6 @@
       line-height: 1.6;
     }
 
-    /* Mission Section */
     .mission-statement {
       font-size: 1.8rem;
       text-align: center;
@@ -87,7 +85,6 @@
       100% { left: 100%; }
     }
 
-    /* Features Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -133,7 +130,6 @@
       display: inline-block;
     }
 
-    /* Timeline */
     .timeline {
       position: relative;
       max-width: 1000px;
@@ -194,7 +190,6 @@
       gap: 10px;
     }
 
-    /* Team Section */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -237,7 +232,6 @@
     }
 
 
-    /* Stats Counter */
     .stats-counter {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -268,7 +262,6 @@
       font-size: 1.1rem;
     }
 
-    /* Tech Stack */
     .tech-stack {
       display: flex;
       justify-content: center;
@@ -295,7 +288,6 @@
       border-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       .hero-title {
         font-size: 2.8rem;
@@ -331,9 +323,6 @@
         font-size: 2.8rem;
       }
 
-      .cta-title {
-        font-size: 2rem;
-      }
     }
 
     @media (max-width: 480px) {
@@ -361,7 +350,6 @@
       }
     }
 
-    /* Animation for counters */
     @keyframes countUp {
       from {
         opacity: 0;
@@ -375,10 +363,8 @@
   </style>
 </head>
 <body>
-<!-- Background Pattern -->
 <div class="bg-pattern"></div>
 
-<!-- Navigation -->
 <nav class="navbar">
   <div class="container">
     <a href="/" class="navbar-brand">
@@ -393,7 +379,6 @@
   </div>
 </nav>
 
-<!-- Main Content -->
 <main class="container">
   <!-- Hero Section -->
   <section class="about-hero">
@@ -426,7 +411,6 @@
     </div>
   </section>
 
-  <!-- Mission Statement -->
   <section>
     <div class="mission-statement">
       <i class="bi bi-quote" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i>
@@ -437,7 +421,6 @@
     </div>
   </section>
 
-  <!-- Key Features -->
   <section>
     <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
       Why Choose SkyCast?
@@ -506,7 +489,6 @@
     </div>
   </section>
 
-  <!-- Our Story Timeline -->
   <section>
     <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
       Our Journey
@@ -555,7 +537,6 @@
     </div>
   </section>
 
-  <!-- Technology Stack -->
   <section>
     <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
       Technology Stack
@@ -564,7 +545,7 @@
     <div class="tech-stack">
       <div class="tech-item">
         <i class="bi bi-braces" style="color: var(--primary);"></i>
-        <span>Spring Boot</span>
+        <span>Spring</span>
       </div>
       <div class="tech-item">
         <i class="bi bi-database" style="color: var(--secondary);"></i>
@@ -596,7 +577,6 @@
     </div>
   </section>
 
-  <!-- Team Section -->
   <section>
     <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">
       Meet Our Team
@@ -630,7 +610,6 @@
     </div>
   </section>
 
-  <!-- Footer Note -->
   <div style="text-align: center; padding: 3rem 0; color: rgba(255, 255, 255, 0.4);">
     <p>
       <i class="bi bi-heart-fill" style="color: #EF4444;"></i>
@@ -642,11 +621,8 @@
   </div>
 </main>
 
-<!-- Scripts -->
 <script>
-  // Animated counters
   document.addEventListener('DOMContentLoaded', function() {
-    // Add animation to counters when they come into view
     const observerOptions = {
       threshold: 0.5,
       rootMargin: '0px 0px -100px 0px'
@@ -660,12 +636,10 @@
       });
     }, observerOptions);
 
-    // Observe all counter items
     document.querySelectorAll('.counter-item').forEach(item => {
       observer.observe(item);
     });
 
-    // Add hover effects to team cards
     document.querySelectorAll('.team-card').forEach(card => {
       card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-8px)';
@@ -676,7 +650,6 @@
       });
     });
 
-    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -693,13 +666,11 @@
       });
     });
 
-    // Add floating animation to feature icons
     document.querySelectorAll('.feature-icon').forEach(icon => {
       icon.style.animation = 'float 3s ease-in-out infinite';
     });
   });
 
-  // Back to top button functionality
   window.addEventListener('scroll', function() {
     const backToTopBtn = document.getElementById('backToTop');
     if (backToTopBtn) {
@@ -712,7 +683,6 @@
   });
 </script>
 
-<!-- Back to Top Button -->
 <button id="backToTop"
         style="position: fixed; bottom: 30px; right: 30px;
                    background: var(--primary); color: white; border: none;

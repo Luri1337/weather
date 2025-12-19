@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oops! | SkyCast Weather</title>
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -115,10 +113,8 @@
     </style>
 </head>
 <body>
-<!-- Background -->
 <div class="bg-pattern"></div>
 
-<!-- Error Container -->
 <div class="error-container">
     <div class="error-card glass" style="padding: 3rem;">
         <div class="error-icon">
@@ -175,7 +171,6 @@
         }
     }
 
-    // Add some interactive effects
     $(document).ready(function() {
         $('.error-card').hover(
             function() {
@@ -186,7 +181,6 @@
             }
         );
 
-        // Add pulse animation to try again button every 10 seconds
         setInterval(() => {
             $('.btn-outline').addClass('pulse');
             setTimeout(() => {

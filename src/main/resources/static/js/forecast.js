@@ -11,6 +11,7 @@ class ForecastService {
         this.updateUI();
         this.setupEventListeners();
         this.showCurrentTime();
+        this.initializeSummaryState();
     }
 
     generateForecast() {
@@ -19,11 +20,17 @@ class ForecastService {
         const forecast = [];
 
         const conditions = [
-            { icon: 'bi-sun', name: 'Clear', code: 'clear', color: 'condition-clear', prob: 0.3 },
-            { icon: 'bi-cloud-sun', name: 'Partly Cloudy', code: 'partly-cloudy', color: 'condition-partly-cloudy', prob: 0.4 },
-            { icon: 'bi-cloud', name: 'Cloudy', code: 'cloudy', color: 'condition-cloudy', prob: 0.2 },
-            { icon: 'bi-cloud-rain', name: 'Rain', code: 'rain', color: 'condition-rain', prob: 0.08 },
-            { icon: 'bi-cloud-lightning-rain', name: 'Storm', code: 'storm', color: 'condition-storm', prob: 0.02 }
+            {icon: 'bi-sun', name: 'Clear', code: 'clear', color: 'condition-clear', prob: 0.3},
+            {
+                icon: 'bi-cloud-sun',
+                name: 'Partly Cloudy',
+                code: 'partly-cloudy',
+                color: 'condition-partly-cloudy',
+                prob: 0.4
+            },
+            {icon: 'bi-cloud', name: 'Cloudy', code: 'cloudy', color: 'condition-cloudy', prob: 0.2},
+            {icon: 'bi-cloud-rain', name: 'Rain', code: 'rain', color: 'condition-rain', prob: 0.08},
+            {icon: 'bi-cloud-lightning-rain', name: 'Storm', code: 'storm', color: 'condition-storm', prob: 0.02}
         ];
 
         const getTemperatureForHour = (hourOffset) => {
@@ -106,7 +113,7 @@ class ForecastService {
             const feelsLike = this.calculateFeelsLike(temp, condition.code, hour);
 
             let precipitation;
-            switch(condition.code) {
+            switch (condition.code) {
                 case 'rain':
                     precipitation = 75 + Math.round(Math.random() * 20);
                     break;
@@ -156,7 +163,7 @@ class ForecastService {
     calculateFeelsLike(temp, conditionCode, hour) {
         let feelsLike = temp;
 
-        switch(conditionCode) {
+        switch (conditionCode) {
             case 'rain':
                 feelsLike -= 1.5;
                 break;
@@ -186,7 +193,7 @@ class ForecastService {
             baseHumidity = 65;
         }
 
-        switch(conditionCode) {
+        switch (conditionCode) {
             case 'rain':
             case 'storm':
                 baseHumidity += 15;
@@ -280,6 +287,7 @@ class ForecastService {
         container.html(html);
     }
 
+
     updateForecastSummary() {
         if (!this.forecastData || this.forecastData.length === 0) return;
 
@@ -291,7 +299,6 @@ class ForecastService {
         $('#minTemp').text(`${minTemp}°C`);
         $('#rainHours').text(`${rainHours} hours`);
 
-        $('#forecastSummary').fadeIn();
     }
 
     initChart() {
@@ -395,7 +402,7 @@ class ForecastService {
                         ticks: {
                             color: 'rgba(255, 255, 255, 0.6)',
                             maxRotation: 0,
-                            callback: function(value, index) {
+                            callback: function (value, index) {
                                 // Show every 3rd hour label
                                 return index % 3 === 0 ? this.getLabelForValue(value) : '';
                             }
@@ -411,7 +418,7 @@ class ForecastService {
                         },
                         ticks: {
                             color: 'rgba(255, 255, 255, 0.6)',
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value + '°C';
                             }
                         },
@@ -427,7 +434,7 @@ class ForecastService {
                         },
                         ticks: {
                             color: 'rgba(96, 165, 250, 0.7)',
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value + '%';
                             }
                         },
@@ -514,12 +521,15 @@ class ForecastService {
         const $summary = $('#forecastSummary');
         const $btn = $('#toggleSummary');
 
-        if ($summary.is(':visible')) {
-            $summary.slideUp();
-            $btn.html('<i class="bi bi-chevron-down"></i> Show Summary');
-        } else {
+        const btnText = $btn.html();
+        const isCurrentlyHidden = btnText.includes('Show Summary');
+
+        if (isCurrentlyHidden) {
             $summary.slideDown();
             $btn.html('<i class="bi bi-chevron-up"></i> Hide');
+        } else {
+            $summary.slideUp();
+            $btn.html('<i class="bi bi-chevron-down"></i> Show Summary');
         }
     }
 
@@ -585,13 +595,21 @@ class ForecastService {
 
     showCurrentTime() {
         const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
         $('#currentTimeDisplay').text(timeString);
         $('#currentTimeIndicator').fadeIn();
     }
+
+    initializeSummaryState() {
+        const $summary = $('#forecastSummary');
+        const $btn = $('#toggleSummary');
+
+        $summary.show();
+        $btn.html('<i class="bi bi-chevron-up"></i> Hide');
+    }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     setTimeout(() => {
         let currentTemp = 20;
 
