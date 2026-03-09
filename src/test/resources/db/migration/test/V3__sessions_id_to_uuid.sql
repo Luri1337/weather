@@ -1,0 +1,5 @@
+ALTER TABLE sessions
+    DROP COLUMN id;
+
+ALTER TABLE sessions
+    ADD id UUID NOT NULL PRIMARY KEY;
