@@ -21,6 +21,7 @@ public class WeatherApiClient {
     public WeatherApiClient(@Value("${weather.api.base-url}") String baseUrl) {
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
+                .defaultHeader("Accept-Charset", "UTF-8")
                 .build();
     }
 
@@ -67,7 +68,7 @@ public class WeatherApiClient {
                 .block();
 
         LocationDto locationDto = new LocationDto();
-        locationDto.setCountry((String) resp.get("name"));
+        locationDto.setName((String) resp.get("name"));
 
         Map<String, Object> cord = (Map<String, Object>) resp.get("coord");
         if (cord != null) {

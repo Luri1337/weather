@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import model.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute @Valid UserDto userDto, Model model, HttpServletResponse response) {
+    public String loginUser(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, Model model, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", bindingResult.getAllErrors().getFirst().getDefaultMessage());
+            return "login";
+        }
+
         Session session = authService.authenticate(userDto);
         Cookie cookie = cookieService.createCookie(session.getId().toString());
         response.addCookie(cookie);
@@ -45,7 +51,12 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String signupUser(@ModelAttribute @Valid UserDto userDto, Model model, HttpServletResponse response) {
+    public String signupUser(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, Model model, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", bindingResult.getAllErrors().getFirst().getDefaultMessage());
+            return "signup";
+        }
+
         Session session = authService.register(userDto);
         Cookie cookie = cookieService.createCookie(session.getId().toString());
         response.addCookie(cookie);

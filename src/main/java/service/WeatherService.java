@@ -25,7 +25,7 @@ public class WeatherService {
     }
 
     private LocationDto convertTempInCelsius(LocationDto location) {
-        location.setTemp(location.getTemp() - 273.15);
+        location.setTemp(Math.round(location.getTemp() - 273.15));
         return location;
     }
 

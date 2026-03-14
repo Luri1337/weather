@@ -13,14 +13,17 @@
                     <h2 class="mb-4 text-center">Login</h2>
                     <p class="text-muted mb-4 text-center">Please fill in the fields</p>
 
+                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
                     <form class="px-2" method="post" th:action="@{/login}">
                         <div class="mb-3">
                             <label for="login" class="form-label">Username</label>
                             <input type="text" class="form-control" id="login" name="login" required>
+                            <small class="text-muted">3-20 characters, start with a letter, only letters, numbers, dots or underscores.</small>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                            <small class="text-muted">8-32 characters, only letters and numbers.</small>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
