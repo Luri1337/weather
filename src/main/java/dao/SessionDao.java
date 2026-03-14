@@ -30,6 +30,10 @@ public class SessionDao {
        return session.isEmpty() ? Optional.empty() : Optional.of(session.getFirst());
     }
 
+    public void update(Session session) {
+        em.merge(session);
+    }
+
     public void delete(Session session) {
         em.remove(session);
         em.flush();

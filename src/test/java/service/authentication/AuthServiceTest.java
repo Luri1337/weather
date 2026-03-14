@@ -26,8 +26,8 @@ public class AuthServiceTest {
     UserDao userDao;
 
     @Test
-    void registerTest(){
-        UserDto testUser= new UserDto("test", "password");
+    void registerTest() {
+        UserDto testUser = new UserDto("test", "password");
         Session session = authService.register(testUser);
 
         User user = userDao.getUserByLogin(testUser.getLogin()).orElse(null);
@@ -37,5 +37,15 @@ public class AuthServiceTest {
                 () -> assertNotNull(session),
                 () -> assertNotNull(user)
         );
+
+    }
+
+    @Test
+    void UniqueLoginTest() {
+        UserDto testUser = new UserDto("test", "password");
+        authService.register(testUser);
+
+        assertThrows(Exception.class, () -> authService.register(testUser));
     }
 }
+
